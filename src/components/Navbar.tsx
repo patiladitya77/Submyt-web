@@ -1,4 +1,17 @@
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 const Navbar = () => {
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    const res = await axios.post(
+      "http://localhost:7777/api/auth/logout",
+      {},
+      { withCredentials: true }
+    );
+    console.log(res);
+    navigate("/");
+  };
   return (
     <div>
       <div className="navbar bg-base-100 bg-blue-950 text-white">
@@ -26,7 +39,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-black"
             >
               <li>
                 <a>Homepage</a>
@@ -37,6 +50,9 @@ const Navbar = () => {
               <li>
                 <a>About</a>
               </li>
+              <button onClick={handleLogout}>
+                <a>Logout</a>
+              </button>
             </ul>
           </div>
         </div>

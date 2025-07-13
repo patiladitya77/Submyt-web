@@ -1,5 +1,11 @@
+import Login from "./Login";
+
 const Landing = () => {
-  return <div>Landing</div>;
+  return (
+    <div>
+      <Login />
+    </div>
+  );
 };
 
 export default Landing;
