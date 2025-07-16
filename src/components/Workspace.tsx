@@ -9,7 +9,7 @@ const Workspace = () => {
   const dispatch = useDispatch();
   const getForms = async () => {
     try {
-      const res = await axios.get(BASE_URL + "/api/form/getforms", {
+      const res = await axios.get(BASE_URL + "/form/getforms", {
         withCredentials: true,
       });
       console.log(res.data);

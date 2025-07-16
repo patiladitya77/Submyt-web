@@ -14,7 +14,13 @@ const formSlice = createSlice({
       state.form = action.payload;
     },
     editForm: (state, action) => {
-      state.formFields.push(action.payload);
+      if (Array.isArray(action.payload)) {
+        // Example: when loading form from DB
+        state.formFields = action.payload;
+      } else {
+        // Example: when adding new element from sidebar
+        state.formFields.push(action.payload);
+      }
     },
     updateFieldLabel: (state, action) => {
       const { groupIndex, fieldIndex, newLabel } = action.payload;

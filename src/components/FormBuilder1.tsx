@@ -1,5 +1,5 @@
 // FormBuilder.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FiUser,
   FiMail,
@@ -64,6 +64,22 @@ const FormBuilder = () => {
   console.log(formIdParam.formId);
   const sections = useSelector((store) => store.form.formFields);
   console.log(sections);
+
+  const getFormById = async () => {
+    try {
+      const res = await axios.get(
+        BASE_URL + "/form/getform/" + formIdParam.formId,
+        { withCredentials: true }
+      );
+      console.log(res.data.getForm.sections);
+      dispatch(editForm(res.data.getForm.sections));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getFormById();
+  }, []);
 
   const handleSaveForm = async () => {
     try {

@@ -9,7 +9,8 @@ interface IFormGroup {
 }
 
 const Canvas = () => {
-  const formGroups = useSelector((store) => store.form.formFields);
+  const formGroups: IFormGroup[] =
+    useSelector((store) => store.form.formFields) || [];
   const dispatch = useDispatch();
   const [selectedGroupIndex, setSelectedGroupIndex] = useState<number | null>(
     null
@@ -61,37 +62,38 @@ const Canvas = () => {
                 )}
 
                 {/* Render all fields inside the group */}
-                {group.fields.map((field: Field, fieldIndex: number) => (
-                  <div key={field.id} className="flex-1">
-                    <input
-                      type="text"
-                      value={field.label}
-                      onChange={(e) => {
-                        dispatch(
-                          updateFieldLabel({
-                            groupIndex,
-                            fieldIndex,
-                            newLabel: e.target.value,
-                          })
-                        );
-                      }}
-                      className="block mb-1 font-medium w-full border-b border-gray-300 focus:outline-none focus:border-blue-500"
-                    />
-
-                    {field.type === "textarea" ? (
-                      <textarea
-                        className="w-full border px-3 py-2 rounded"
-                        required={field.isRequired}
-                      />
-                    ) : (
+                {Array.isArray(group.fields) &&
+                  group.fields.map((field: Field, fieldIndex: number) => (
+                    <div key={field.id} className="flex-1">
                       <input
-                        type={field.type}
-                        className="w-full border px-3 py-2 rounded"
-                        required={field.isRequired}
+                        type="text"
+                        value={field.label}
+                        onChange={(e) => {
+                          dispatch(
+                            updateFieldLabel({
+                              groupIndex,
+                              fieldIndex,
+                              newLabel: e.target.value,
+                            })
+                          );
+                        }}
+                        className="block mb-1 font-medium w-full border-b border-gray-300 focus:outline-none focus:border-blue-500"
                       />
-                    )}
-                  </div>
-                ))}
+
+                      {field.type === "textarea" ? (
+                        <textarea
+                          className="w-full border px-3 py-2 rounded"
+                          required={field.isRequired}
+                        />
+                      ) : (
+                        <input
+                          type={field.type}
+                          className="w-full border px-3 py-2 rounded"
+                          required={field.isRequired}
+                        />
+                      )}
+                    </div>
+                  ))}
               </div>
             );
           })

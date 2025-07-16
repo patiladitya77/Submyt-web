@@ -15,7 +15,7 @@ const SideBar = () => {
   const handleCreateForm = async () => {
     try {
       const res = await axios.post(
-        BASE_URL + "/api/form/createform",
+        BASE_URL + "/form/createform",
         { title, description },
         { withCredentials: true }
       );
@@ -129,23 +129,6 @@ const SideBar = () => {
         </div>
       )}
     </div>
-
-    // <div className="w-64 h-screen border border-black  m-2 p-2">
-    //   <div className="border border-black w-full">
-    //     <button className="bg-gray-600">Create</button>
-    //   </div>
-    //   <div>
-    //     <h1>My workspace</h1>
-    //     <p>All</p>
-    //   </div>
-    //   <div>
-    //     <ul>
-    //       <li>Favourites</li>
-    //       <li>Archives</li>
-    //       <li>Trash</li>
-    //     </ul>
-    //   </div>
-    // </div>
   );
 };
 
