@@ -10,9 +10,11 @@ import {
   FiX,
   FiPlus,
 } from "react-icons/fi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { editForm } from "../utils/formSlice";
 import Canvas from "./Canvas";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const formfields = {
   fullName: {
@@ -57,6 +59,22 @@ const formfields = {
 const FormBuilder = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dispatch = useDispatch();
+  const formIdParam = useParams();
+  console.log(formIdParam.formId);
+  const sections = useSelector((store) => store.form.formFields);
+  console.log(sections);
+
+  const handleSaveForm = async () => {
+    try {
+      await axios.patch(
+        "http://localhost:7777/api/form/editform/" + formIdParam.formId,
+        { sections: sections },
+        { withCredentials: true }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleAddFieldGroup = (field) => {
     dispatch(editForm(field));
@@ -81,7 +99,10 @@ const FormBuilder = () => {
         <div className="h-full border border-black py-3 px-4 cursor-pointer">
           BUILD
         </div>
-        <div className="h-full border border-black py-3 px-4 cursor-pointer">
+        <div
+          className="h-full border border-black py-3 px-4 cursor-pointer"
+          onClick={handleSaveForm}
+        >
           SAVE
         </div>
         <div className="h-full border border-black py-3 px-4 cursor-pointer">
