@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addnewCreatedForm } from "../utils/formSlice";
+import { BASE_URL } from "../utils/constants";
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const SideBar = () => {
   const handleCreateForm = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:7777/api/form/createform",
+        BASE_URL + "/api/form/createform",
         { title, description },
         { withCredentials: true }
       );

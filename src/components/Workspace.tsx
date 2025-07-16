@@ -3,12 +3,13 @@ import FormContainer from "./FormContainer";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setForms } from "../utils/formSlice";
+import { BASE_URL } from "../utils/constants";
 
 const Workspace = () => {
   const dispatch = useDispatch();
   const getForms = async () => {
     try {
-      const res = await axios.get("http://localhost:7777/api/form/getforms", {
+      const res = await axios.get(BASE_URL + "/api/form/getforms", {
         withCredentials: true,
       });
       console.log(res.data);

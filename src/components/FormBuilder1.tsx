@@ -15,6 +15,7 @@ import { editForm } from "../utils/formSlice";
 import Canvas from "./Canvas";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 const formfields = {
   fullName: {
@@ -67,7 +68,7 @@ const FormBuilder = () => {
   const handleSaveForm = async () => {
     try {
       await axios.patch(
-        "http://localhost:7777/api/form/editform/" + formIdParam.formId,
+        BASE_URL + "/form/editform/" + formIdParam.formId,
         { sections: sections },
         { withCredentials: true }
       );

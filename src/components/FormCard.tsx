@@ -1,3 +1,5 @@
+import { FORM_LOGO } from "../utils/constants";
+
 interface IFormCradProps {
   title: string;
 }
@@ -10,11 +12,7 @@ const FormCard = ({ title }: IFormCradProps) => {
           <div className="flex items-center justify-between w-full">
             {/* Left side: Icon + Title */}
             <div className="flex items-center">
-              <img
-                className="h-8 w-8"
-                src="https://cdn.jotfor.ms/assets/img/jfHeader/v2/templates/form.svg"
-                alt="Form Icon"
-              />
+              <img className="h-8 w-8" src={FORM_LOGO} alt="Form Icon" />
               <div className="ml-4">
                 <p className="font-bold text-lg text-black truncate max-w-[200px]">
                   {title}
